@@ -2,9 +2,9 @@ name: CI
 
 on:
   push:
-    branches: [ main ]
+    branches: [ main, feat/IOTAG-01-api-gateway ]
   pull_request:
-    branches: [ main ]
+    branches: [ main, feat/IOTAG-01-api-gateway ]
 
 jobs:
   pipeline:
