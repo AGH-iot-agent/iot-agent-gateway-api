@@ -1,0 +1,8 @@
+# Ustawienia logowania do pliku bez timestampu
+logging:
+  file:
+    name: /logs/service-logs.log
+  pattern:
+    file: "%msg%n"
+  level:
+    root: INFO

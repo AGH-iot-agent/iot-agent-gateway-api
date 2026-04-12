@@ -64,7 +64,7 @@ security:
 # Istio VirtualService definitions
 istio:
   gateway:
-    createIfMissing: true
+    createIfMissing: false
     namespace: istio-system
     name: istio-ingressgateway
     selector:
@@ -79,7 +79,8 @@ istio:
     hosts:
       - iot-agent-gateway-api-dev.iotag-dev.com
     # Gateways list, if empty chart auto-selects istio-system/istio-ingressgateway when present
-    gateways: []
+    gateways:
+      - istio-system/istio-ingressgateway
     # Optional full HTTP spec override. If empty, chart creates a default route
     http:
       - match:
@@ -87,7 +88,7 @@ istio:
               prefix: /
         route:
           - destination:
-              host: iot-agent-gateway-api-dev.iotag-dev.svc.cluster.local
+              host: iot-agent-gateway-api.iotag-dev.svc.cluster.local
               port:
                 number: 80
     # http: []
@@ -181,7 +182,23 @@ labelsEnableDefault: true
 lifecycle: {}
 
 # Environment variables (for globals, all deployments)
-globalEnvs: []
+globalEnvs:
+  - name: GATEWAY_ROUTES_0_PATH
+    value: "/devices"
+  - name: GATEWAY_ROUTES_0_SERVICE
+    value: "iot-agent-device-api"
+  - name: GATEWAY_ROUTES_1_PATH
+    value: "/alerts"
+  - name: GATEWAY_ROUTES_1_SERVICE
+    value: "iot-agent-alert-api"
+  - name: GATEWAY_ROUTES_2_PATH
+    value: "/logs"
+  - name: GATEWAY_ROUTES_2_SERVICE
+    value: "iot-agent-logs"
+  - name: GATEWAY_ROUTES_3_PATH
+    value: "/summary"
+  - name: GATEWAY_ROUTES_3_SERVICE
+    value: "iot-agent-dashboard-api"
 
 # Secondary environment variables (for globals, all deployments, to help with multi-inheritance)
 globalEnvsSecondary: []

@@ -5,11 +5,31 @@ spring:
   application:
     name: iot-agent-gateway-api
 
+gateway:
+  routes:
+    - path: "/auth"
+      service: iot-agent-authentication
+      port: 8089
+    - path: "/devices"
+      service: iot-agent-device-api
+    - path: "/alerts"
+      service: iot-agent-alert-api
+    - path: "/logs"
+      service: iot-agent-logs
+    - path: "/summary"
+      service: iot-agent-dashboard-api
+    - path: "/api/summary"
+      service: iot-agent-dashboard-api
+    - path: "/api/devices"
+      service: iot-agent-dashboard-api
+    - path: "/telemetry"
+      service: iot-agent-dashboard-api
+
 management:
   endpoints:
     web:
       exposure:
-        include: health,info
+        include: health,info,metrics,prometheus
   endpoint:
     health:
       show-details: always
