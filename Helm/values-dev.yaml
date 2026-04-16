@@ -204,7 +204,9 @@ globalEnvs:
 globalEnvsSecondary: []
 
 # A tertiary source for env variables (eg: used for a specific env (eg: dev, or staging))
-extraEnvs: []
+extraEnvs:
+  - name: JWT_SECRET
+    value: "supersecretkey"
 
 # stdin and tty status
 tty: false
