@@ -9,7 +9,7 @@ gateway:
   routes:
     - path: "/auth"
       service: iot-agent-authentication
-      port: 8089
+      port: 80
     - path: "/devices"
       service: iot-agent-device-api
     - path: "/alerts"
