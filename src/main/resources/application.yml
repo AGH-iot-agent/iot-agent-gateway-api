@@ -33,3 +33,9 @@ management:
   endpoint:
     health:
       show-details: always
+  spring:
+    security:
+      oauth2:
+        resourceserver:
+          jwt:
+            secret: ${JWT_SECRET:supersecretkey}
