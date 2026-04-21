@@ -9,8 +9,7 @@ spring:
     oauth2:
       resourceserver:
         jwt:
-          issuer-uri: http://keycloak:8080/realms/master
-gateway:
+          issuer-uri: http://iot-agent-auth-dev.iotag-dev.com/realms/master
   routes:
     - path: "/auth"
       service: iot-agent-authentication
