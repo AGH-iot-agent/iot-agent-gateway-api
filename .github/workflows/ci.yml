@@ -1,0 +1,20 @@
+name: CI
+
+on:
+  push:
+    branches: [ main, feat/IOTAG-01-api-gateway ]
+  pull_request:
+    branches: [ main, feat/IOTAG-01-api-gateway ]
+
+jobs:
+  pipeline:
+    uses: AGH-iot-agent/common-pipeline/.github/workflows/common-pipeline.yml@feat/IOTAG-01-common-pipeline
+    secrets: inherit
+    with:
+      service_name: iot-agent-gateway-api
+      project_type: maven
+      java_version: "21"
+      values_file: ${{ github.event_name == 'pull_request' && 'Helm/values-sbx.yaml' || 'Helm/values-dev.yaml' }}
+      chart_type: deployment
+      namespace: ${{ github.event_name == 'pull_request' && 'iotag-sbx' || 'iotag-dev' }}
+      deploy: true
